@@ -27,23 +27,31 @@ struct ContentView: View {
                 Text("Users").font(.largeTitle)
                 ForEach(users) { user in
                     // user row
-                    HStack {
-                        Image(String(user.id + 1))
-                            .resizable()
-                            .frame(width: 60, height: 60)
-                            .clipShape(Circle())
-                            .overlay(Circle().stroke(Color.gray, lineWidth: 2))
-                            .aspectRatio(contentMode: .fit)
-                        VStack (alignment: .leading) {
-                            Text(user.username).font(.headline)
-                            Text(user.message).font(.subheadline)
-                        }.padding(.leading, 8)
-                    }.padding(.init(top: 12, leading: 0, bottom: 12, trailing: 0))
-                    
+                    UserRow(user: user)
                 }
                
             }.navigationBarTitle(Text("Dynamic List"))
         }
+    }
+}
+
+struct UserRow: View {
+    
+    var user: User
+    
+    var body: some View {
+        HStack {
+            Image(String(user.id + 1))
+                .resizable()
+                .frame(width: 60, height: 60)
+                .clipShape(Circle())
+                .overlay(Circle().stroke(Color.gray, lineWidth: 2))
+                .aspectRatio(contentMode: .fit)
+            VStack (alignment: .leading) {
+                Text(user.username).font(.headline)
+                Text(user.message).font(.subheadline)
+            }.padding(.leading, 8)
+        }.padding(.init(top: 12, leading: 0, bottom: 12, trailing: 0))
     }
 }
 
